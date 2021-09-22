@@ -1,20 +1,27 @@
-* {
-  margin: 0;
-  padding: 0;
-
+html{
+    background-color: #c72c41;
 }
 
-body{
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.4;
+.app{
+    text-align: center;
+    padding: 40px;
 }
 
-h1{
-  font-size: 3em;
+button{
+    padding: 8px;
 }
 
-.main{
-  color:white;
-  font-size: large;
-  padding-top: 500px;
+.container{
+    padding: 40px;
+    margin-top: 200px;
+    min-height: 200px;
+}
+
+.item{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0) 0px 8px 24px;
 }

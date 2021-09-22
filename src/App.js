@@ -1,31 +1,39 @@
-import {useSpring, animated} from 'react-spring'
+import {useState} from 'react'
 import './App.css'
+import {useTransition, animated} from 'react-spring'
+
+
 const App = () => {
-  const props = useSpring({
-    from: {
-      left: "0%",
-      bottom: "100%",
-      width: "100%",
-      height: "100vh",
-      background: "#4D806B",
-      marginTop:"-500px"
+  const [items, setItems] = useState([])
+
+  const transition = useTransition(items, {
+    from:{x: -100, y: 800, opacity: 0, width:10, height:10},
+    enter:item => async(next) => {
+      await next({ y: item.y, opacity:1, delay:item.delay})
+      await  next({x: 0, width:100, height:100})
     },
-    to: async (next) => {
-      await next({
-        left: "0%",
-        bottom: "0%",
-        width: "100%",
-        height: "100vh",
-        background: "#4D806B",
-        marginTop:"0px"
-      });
-    },
-  });
+    leave:{x: 100, y: 800, opacity: 0}
+  })
 
   return (
-    <animated.div className='main' style={props}>
-      tech
-    </animated.div>
+    <div className='app'>
+      <button onClick={()=>{
+        setItems(v => v.length ? []: [
+            {y: -100, delay:200},
+            {y:0, delay:400},
+            {y:100, delay:600}
+          ])
+      }}>
+       { items.length ?'unmount' :'mount' }
+      </button>
+      <div className='container'>
+        {
+          transition((style, item) =>
+          item ?  <animated.div style={style} className='item' /> :''
+          )}
+       
+      </div>
+    </div>
   )
 }
 
